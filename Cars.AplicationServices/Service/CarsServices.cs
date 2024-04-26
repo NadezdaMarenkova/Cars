@@ -2,6 +2,7 @@
 using Cars.Core.Dto;
 using Cars.Core.ServiceInterface;
 using Cars.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,14 @@ namespace Cars.AplicationServices.Service
             return carDto;
 
     
+        }
+
+        //Details
+        public async Task<Car> GetAsync(Guid id)
+        {
+            var result = await _context.Cars
+                .FirstOrDefaultAsync(x => x.Id == id);
+            return result;
         }
     }
 }

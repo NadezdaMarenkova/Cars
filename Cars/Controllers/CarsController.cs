@@ -43,6 +43,31 @@ namespace Cars.Controllers
 
             return View("Create", viewModel);
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+      
+            var carsController = await _carService.GetAsync(id);
+            if (carsController==null)
+            {
+                return NotFound();
+            }
+
+            var vm = new CarsViewModel
+            {
+                Id = Guid.NewGuid(),
+                CarMake = carsController.CarMake,
+                Year = carsController.Year,
+                CarColor = carsController.CarColor,
+                CreatedAt = DateTime.UtcNow,
+                Modifieted = DateTime.UtcNow
+
+            };
+            return View(vm);
+
+
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Create(CarsCreateUpdateViewModel vm)
