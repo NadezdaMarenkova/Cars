@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 namespace Cars.Controllers
 {
     using Cars.AplicationServices.Service;
@@ -36,13 +35,6 @@ namespace Cars.Controllers
 
             return View(cars);
         }
-
-        public IActionResult Create()
-        {
-            CarsCreateUpdateViewModel viewModel = new CarsCreateUpdateViewModel();
-
-            return View("Create", viewModel);
-        }
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
@@ -67,8 +59,12 @@ namespace Cars.Controllers
 
 
         }
+        public IActionResult Create()
+        {
+            CarsCreateUpdateViewModel viewModel = new CarsCreateUpdateViewModel();
 
-
+            return View("Create", viewModel);
+        }
         [HttpPost]
         public async Task<IActionResult> Create(CarsCreateUpdateViewModel vm)
         {
@@ -95,6 +91,26 @@ namespace Cars.Controllers
             }
  
             return View(vm);
+        }
+        public async Task<IActionResult> Update(Guid id)
+        {
+            var carsController = await _carService.GetAsync(id);
+            if (carsController == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new CarsCreateUpdateViewModel
+            {
+                Id = Guid.NewGuid(),
+                CarMake = carsController.CarMake,
+                Year = carsController.Year,
+                CarColor = carsController.CarColor,
+                CreatedAt = DateTime.UtcNow,
+                Modifieted = DateTime.UtcNow
+
+            };
+            return View("Update", vm);
         }
 
         [HttpPost]
