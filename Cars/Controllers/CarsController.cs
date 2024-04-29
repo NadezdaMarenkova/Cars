@@ -139,6 +139,30 @@ namespace Cars.Controllers
 
 
         }
+        [HttpGet]
+        public async Task<IActionResult> DeletePrimaryData(Guid id)
+        {
+            var car = await _carService.DeletePrimaryData(id);
+            if (car == null)
+            {
+                return NotFound();
+            }
+
+
+            var vm = new CarsViewModel
+            {
+                Id = car.Id,
+                CarMake = car.CarMake,
+                Year = car.Year,
+                CarColor = car.CarColor,
+                CreatedAt = car.CreatedAt,
+                Modifieted = car.Modifieted,
+
+
+            };
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 
     

@@ -42,6 +42,14 @@ namespace Cars.AplicationServices.Service
 
     
         }
+        public async Task<Car> DeletePrimaryData(Guid id)
+        {
+            var carId = await _context.Cars
+                .FirstOrDefaultAsync(x => x.Id == id);
+            _context.Cars.Remove(carId);
+            await _context.SaveChangesAsync();
+            return carId;
+        }
 
         //Details
         public async Task<Car> GetAsync(Guid id)
