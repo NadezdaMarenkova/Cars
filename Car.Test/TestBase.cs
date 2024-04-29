@@ -1,10 +1,12 @@
 ﻿using Car.Test.Macros;
+using Car.Test.Mock;
 using Cars.AplicationServices.Service;
 using Cars.Core.ServiceInterface;
 using Cars.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +39,8 @@ namespace Car.Test
         public virtual void SetupServices(IServiceCollection services)
         {
             services.AddScoped<ICarServices, CarsServices>();
+            services.AddScoped<IHostEnvironment, MockHostEnvironment>();
+
             services.AddDbContext<CarContext>(x =>
             {
                 x.UseInMemoryDatabase("TEST");

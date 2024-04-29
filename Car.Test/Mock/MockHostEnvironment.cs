@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace Car.Test.Mock
 {
-    public class MockHostEnvironment: IHostEnvironment
+    public class MockHostEnvironment : IHostEnvironment
     {
-        public string EnvironmentName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public string ApplicationName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string ContentRootPath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public IFileProvider ContentRootFileProvider { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string ContentRootPath { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string EnvironmentName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
     }
 }

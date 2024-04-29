@@ -51,6 +51,24 @@ namespace Cars.AplicationServices.Service
             return carId;
         }
 
+        public async Task<Car> Update(CarDto dto)
+        {
+            var car = new Car()
+            {
+                Id = dto.Id,
+                CarMake = dto.CarMake,
+                Year = dto.Year,
+                CarColor = dto.CarColor,
+                CreatedAt = dto.CreatedAt,
+                Modifieted = DateTime.Now,
+
+
+            };
+            _context.Cars.Update(car);
+            await _context.SaveChangesAsync();
+            return car;
+        }
+
         //Details
         public async Task<Car> GetAsync(Guid id)
         {

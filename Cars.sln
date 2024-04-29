@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cars.Core", "Cars.Core\Cars
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cars.Data", "Cars.Data\Cars.Data.csproj", "{46162FA2-D7BB-45B5-ACC1-BEAC3BCB4B5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Car.Test", "Car.Test\Car.Test.csproj", "{23517F27-9239-484C-B0DF-1C578BADD326}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cars.Tests", "Car.Test\Cars.Tests.csproj", "{23517F27-9239-484C-B0DF-1C578BADD326}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

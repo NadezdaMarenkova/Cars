@@ -16,13 +16,11 @@ namespace Cars.Controllers
     {
         private readonly CarContext _context;
         private readonly ICarServices _carService;
-
         public CarsController(CarContext context, ICarServices carService)
         {
             _context = context;
             _carService = carService;
         }
-
         public IActionResult Index()
         {
             var cars = _context.Cars.Select(car => new CarsViewModel
@@ -38,13 +36,11 @@ namespace Cars.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(Guid id)
         {
-      
             var carsController = await _carService.GetAsync(id);
             if (carsController==null)
             {
                 return NotFound();
             }
-
             var vm = new CarsViewModel
             {
                 Id = Guid.NewGuid(),
@@ -56,13 +52,10 @@ namespace Cars.Controllers
 
             };
             return View(vm);
-
-
         }
         public IActionResult Create()
         {
             CarsCreateUpdateViewModel viewModel = new CarsCreateUpdateViewModel();
-
             return View("Create", viewModel);
         }
         [HttpPost]
@@ -79,14 +72,11 @@ namespace Cars.Controllers
                     CreatedAt = DateTime.UtcNow,
                     Modifieted = DateTime.UtcNow
                 };
-
                 var result = await _carService.Create(dto);
-
                 if (result == null)
                 {
                     return RedirectToAction(nameof(Index));
                 }
-
                 return RedirectToAction(nameof(Index));
             }
  
@@ -99,7 +89,6 @@ namespace Cars.Controllers
             {
                 return NotFound();
             }
-
             var vm = new CarsCreateUpdateViewModel
             {
                 Id = Guid.NewGuid(),
@@ -119,12 +108,10 @@ namespace Cars.Controllers
             if (ModelState.IsValid)
             {
                 var car = await _context.Cars.FindAsync(model.Id);
-
                 if (car == null)
                 {
                     return NotFound();
                 }
-
                 car.CarMake = model.CarMake;
                 car.Year = model.Year;
                 car.CarColor = model.CarColor;
@@ -137,7 +124,6 @@ namespace Cars.Controllers
             }
             return View(model);
 
-
         }
         [HttpGet]
         public async Task<IActionResult> DeletePrimaryData(Guid id)
@@ -147,8 +133,6 @@ namespace Cars.Controllers
             {
                 return NotFound();
             }
-
-
             var vm = new CarsViewModel
             {
                 Id = car.Id,
@@ -160,7 +144,6 @@ namespace Cars.Controllers
 
 
             };
-
             return RedirectToAction(nameof(Index));
         }
     }
