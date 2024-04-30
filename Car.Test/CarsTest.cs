@@ -19,6 +19,31 @@ namespace Car.Test
     public class CarsTest: TestBase
     {
         [Fact]
+        public async Task ShouldNot_AddEmptyCar_WhenReturnresult()
+        {
+            CarDto dto = new CarDto();
+            dto.CarMake = "Name";
+            dto.Year= 1800;
+            dto.CarColor = "red";
+            dto.CreatedAt = DateTime.Now;
+            dto.Modifieted = DateTime.Now;
+            var result = await Svc<ICarServices>().Create(dto);
+            Assert.NotNull(result);
+
+        }
+        [Fact]
+        public async Task should_GetByIdCar()
+        {
+            //Arnge
+            Guid guid = Guid.Parse("f6fe9c73-57a1-4e82-98b7-4c70699f723f");
+            Guid guid1 = Guid.Parse("f6fe9c73-57a1-4e82-98b7-4c70699f723f");
+            //Act
+            await Svc<ICarServices>().GetAsync(guid);
+            //Asert
+            Assert.Equal(guid, guid1);
+        }
+
+        [Fact]
         public async Task Should_UpdateCar_WhenNotUpdateData()
         {
             CarDto dto = MockCarsData();
@@ -41,13 +66,25 @@ namespace Car.Test
             Assert.NotEqual(result.Id, car1.Id);
         }
 
+        [Fact]
+        public async Task Should_DeleteByIdCar_WhenDeleteSpaceship()
+        {
+            //Arange
+            CarDto spaceship = MockCarsData();
+            //Act
+            var addSpaceshipt = await Svc<ICarServices>().Create(spaceship);
+            var result = await Svc<ICarServices>().DeletePrimaryData((Guid)addSpaceshipt.Id);
+            //Asert
+            Assert.Equal(result, addSpaceshipt);
+        }
+
 
 
         private CarDto MockCarsData()
         {
             CarDto car = new()
             {
-                CarMake = "Axes",
+                CarMake = "cart",
                 Year = 2000,
                 CarColor = "Yellow",
                 CreatedAt = DateTime.Now,
@@ -59,7 +96,7 @@ namespace Car.Test
         {
             CarDto car = new CarDto()
             {
-                CarMake = "Carriage",
+                CarMake = "bmw",
                 Year = 1999,
                 CarColor = "Green",
                 CreatedAt = DateTime.Now,
