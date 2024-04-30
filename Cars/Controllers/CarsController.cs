@@ -41,7 +41,7 @@ namespace Cars.Controllers
             {
                 return NotFound();
             }
-            var vm = new CarsViewModel
+            var vm = new CarsDetailsViewModel
             {
                 Id = Guid.NewGuid(),
                 CarMake = carsController.CarMake,
@@ -95,7 +95,7 @@ namespace Cars.Controllers
                 CarMake = carsController.CarMake,
                 Year = carsController.Year,
                 CarColor = carsController.CarColor,
-                CreatedAt = DateTime.UtcNow,
+                CreatedAt = carsController.CreatedAt,
                 Modifieted = DateTime.UtcNow
 
             };
@@ -133,7 +133,7 @@ namespace Cars.Controllers
             {
                 return NotFound();
             }
-            var vm = new CarsViewModel
+            var vm = new CarsDeleteViewModel
             {
                 Id = car.Id,
                 CarMake = car.CarMake,
